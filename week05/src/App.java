@@ -1,19 +1,19 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        BasketballPlayer basketballPlayer = new BasketballPlayer(42, "Nike", "Balkan");
+        FootballPlayer footballPlayer = new FootballPlayer(6, "Rosen", "Nike");
 
-        BasketballPlayer basketballPlayer1 = new BasketballPlayer(42, "Adidas", "Botev 2012");
+        FootballPlayer footballPlayer1 = new FootballPlayer(30, "Ivcho", "Nike");
 
-        BasketballPlayer[] players = {basketballPlayer, basketballPlayer1};
+        FootballPlayer[] playersToMatch = {footballPlayer, footballPlayer1};
 
-        BasketballPlayer[] matchedPlayers = BasketballPlayer.returnBasketballPlayers(players, "Nike");
+        ArrayList<FootballPlayer> matchedPlayers = FootballPlayer.returnMatchedFootballPlayers(playersToMatch, "Nike");
 
-        for (BasketballPlayer player: matchedPlayers) {
-            if (player != null) {
-                System.out.println(player.getTeamName());
-            }
+        for (FootballPlayer player : matchedPlayers) {
+            System.out.println(player.getName());
         }
     }
 }
