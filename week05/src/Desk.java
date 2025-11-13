@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Desk {
     private String typeOfMade;
     private int boltsCount;
@@ -23,13 +25,25 @@ public class Desk {
         return this.boltsCount;
     }
 
-    public Desk[] returnMatchedDesks (Desk[] desks, int enteredBoltsCount) {
+    public static Desk[] returnMatchedDesks (Desk[] desks, int enteredBoltsCount) {
         Desk[] matchedDesks = new Desk[desks.length];
         int counter = 0;
 
         for (Desk desk : desks) {
-            if (desk.boltsCount == boltsCount) {
+            if (desk.boltsCount == enteredBoltsCount) {
                 matchedDesks[counter] = desk;
+            }
+        }
+
+        return matchedDesks;
+    }
+
+    public static ArrayList<Desk> returnMatchedDesksByTypeOfMade(Desk[] desks, String typeOfMade) {
+        ArrayList<Desk> matchedDesks = new ArrayList<>();
+
+        for (Desk desk: desks) {
+            if (desk.getTypeOfMade().equals(typeOfMade)) {
+                matchedDesks.add(desk);
             }
         }
 
