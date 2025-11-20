@@ -4,22 +4,26 @@ import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        Desk desk = new Desk("wood", 20);
-        Desk desk1 = new Desk("metal", 19);
+        Book book = new Book("Pod Igoto", "Ivan Vazov", 350, "Roman");
+        Book book1 = new Book("Tutun", "Atanas Dalchev", 400, "Roman");
+        Book book2 = new Book("Pod Igoto", "Rosen Ivanov", 450, "Roman");
 
-        Desk[] desks = {desk, desk1};
-        Desk[] matchedDesks = Desk.returnMatchedDesks(desks, 20);
+        ArrayList<Book> books = new ArrayList<>();
 
-        for (Desk matchedDesk : matchedDesks) {
-            if (matchedDesk != null) {
-                System.out.println("Desk type of made: " + matchedDesk.getTypeOfMade() + ", Desk bolts count: " + matchedDesk.getBoltsCount());
-            }
-        }
+        books.add(book);
+        books.add(book1);
+        books.add(book2);
 
-        ArrayList<Desk> matchedDesksByTypeOfMade = Desk.returnMatchedDesksByTypeOfMade(desks, "metal");
+        BookStore bookStore = new BookStore(books);
 
-        for (Desk matchedDeskByTypeOfMade: matchedDesksByTypeOfMade) {
-            System.out.println("Desk type of made: " + matchedDeskByTypeOfMade.getTypeOfMade() + ", Desk bolts count: " + matchedDeskByTypeOfMade.getBoltsCount());
+        ArrayList<Book> matchedBooks = bookStore.returnMatchedBooksByTitle("Pod Igoto");
+
+        for (Book mathcedBook: matchedBooks) {
+            System.out.println("Book title: " + mathcedBook.title +
+                    " Book author: " + mathcedBook.authorName
+                    + " Pages count: " + mathcedBook.pages +
+                    " Book genre: " + mathcedBook.genre
+            );
         }
     }
 }
