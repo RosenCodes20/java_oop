@@ -18,4 +18,19 @@ public class BookStore {
 
         return matchedBooks;
     }
+
+    public Book[] returnBooksByGenre(String genre) {
+        Book[] matchedBooks = new Book[this.books.toArray().length];
+        int counter = 0;
+
+        for (Book book: this.books) {
+            if (book.genre.equals(genre)) {
+                matchedBooks[counter] = book;
+            }
+
+            counter++;
+        }
+
+        return matchedBooks;
+    }
 }
