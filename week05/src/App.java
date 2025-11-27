@@ -4,37 +4,45 @@ import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        Book book = new Book("Pod Igoto", "Ivan Vazov", 350, "Roman");
-        Book book1 = new Book("Tutun", "Atanas Dalchev", 400, "Roman");
-        Book book2 = new Book("Pod Igoto", "Rosen Ivanov", 450, "Razkaz");
+        Product productOne = new Product("TV Samsung", "Electronics", "Samsung", 400, 10);
+        Product productTwo = new Product("Samsung Galaxy S10", "Electronics", "Samsung", 800, 40);
 
-        ArrayList<Book> books = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(productOne);
+        products.add(productTwo);
 
-        books.add(book);
-        books.add(book1);
-        books.add(book2);
+        Store store = new Store(products);
 
-        BookStore bookStore = new BookStore(books);
-
-        ArrayList<Book> matchedBooks = bookStore.returnMatchedBooksByTitle("Pod Igoto");
-        Book[] matchedBooksByGenre = bookStore.returnBooksByGenre("Roman");
-        for (Book mathcedBook: matchedBooks) {
-            System.out.println("Book title: " + mathcedBook.title +
-                    " Book author: " + mathcedBook.authorName
-                    + " Pages count: " + mathcedBook.pages +
-                    " Book genre: " + mathcedBook.genre
-            );
+        ArrayList<Product> filteredProducts = store.returnMatchedProductsByType("Electronics");
+        if (filteredProducts.isEmpty()) {
+            System.out.println("Nothing found here by this type :(");
+        } else {
+            for (Product product: filteredProducts) {
+                System.out.println(product.productType);
+            }
         }
 
-        for (Book bookByGenre: matchedBooksByGenre) {
-            if (bookByGenre != null) {
-                System.out.println("Book title: " + bookByGenre.title +
-                        " Book author: " + bookByGenre.authorName
-                        + " Pages count: " + bookByGenre.pages +
-                        " Book genre: " + bookByGenre.genre
-                );
+        Product[] filteredProductsByProducer = store.returnMatchedProductsByProducerName("asf");
+        int nullsCount = 0;
+        for (Product filteredProduct: filteredProductsByProducer) {
+            if (filteredProduct != null) {
+                System.out.println(filteredProduct.productName + " " + filteredProduct.productProducer);
             } else {
-                System.out.println("Error with matching this book : (");
+                nullsCount++;
+            }
+        }
+
+        if (nullsCount == filteredProductsByProducer.length) {
+            System.out.println("Nothing found by this producer name :(");
+        }
+
+        ArrayList<Product> filteredProductsByPrice = store.returnProductsFromMinToMaxPrice(400, 800);
+
+        if (filteredProductsByPrice.isEmpty()) {
+            System.out.println("Nothing found from this price diapason");
+        } else {
+            for (Product product: filteredProductsByPrice) {
+                System.out.println(product.productName + " " + product.productPrice);
             }
         }
     }
